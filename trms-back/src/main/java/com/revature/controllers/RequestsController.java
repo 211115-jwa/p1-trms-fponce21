@@ -1,5 +1,9 @@
 package com.revature.controllers;
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.revature.beans.Employee;
 import com.revature.beans.Reimbursement;
 import com.revature.services.EmployeeService;
@@ -9,6 +13,12 @@ import io.javalin.http.Context;
 import io.javalin.http.HttpCode;
 
 public class RequestsController {
+	
+	ObjectMapper objectMapper = new ObjectMapper().registerModule( new JavaTimeModule())
+			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+	
+	//private static Logger log = LogManager.getLogger(RequestsController.class);
+	//look at logging recording
 	private static EmployeeService empServ = new EmployeeServiceImpl();
 	
 	/**
@@ -28,7 +38,10 @@ public class RequestsController {
 	 * @param ctx Javalin's Context object representing the HTTP request and response
 	 */
 	public static void submitReimbursementRequest(Context ctx) {
+		
 		Reimbursement request = ctx.bodyAsClass(Reimbursement.class);
+		//log.info("request object has been submitted:" + request);
+		//ctx.result("");
 		int reqId = empServ.submitReimbursementRequest(request);
 		if (reqId != 0) {
 			ctx.status(HttpCode.CREATED);
