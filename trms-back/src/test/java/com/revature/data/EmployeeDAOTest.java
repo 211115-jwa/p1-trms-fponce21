@@ -3,6 +3,8 @@ package com.revature.data;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,16 +27,9 @@ public class EmployeeDaoTest {
 		Department training = new Department(2,"Training",2);
 		Employee create = new Employee();
 		create.setDepartment(training);
-		Employee meg = new Employee(52);
-		create.setSupervisor(meg);
-		assertNotEquals(0, empd.create(create));
-	}
-	
-	@Test
-	public void getByIdNotNull() {
-		Employee real = empd.getById(2);
-		assertNotEquals(null, real);
-		
+		Employee trev = new Employee(55);
+		create.setSupervisor(trev);
+		assertNotEquals(55, empd.create(create));
 	}
 	
 	@Test
@@ -45,5 +40,48 @@ public class EmployeeDaoTest {
 		assertEquals(expected, actual);
 		
 	}
+	
+	@Test
+	public void getByIdNotNull() {
+		Employee real = empd.getById(2);
+		assertNotEquals(null, real);
+		
+	}
+	
+	@Test
+	public void getAllNotNull() {
+		Set<Employee> actual = empd.getAll();
+		assertNotEquals(null, actual);
+	}
+	
+	@Test
+	public void getByUsernameNotNull() {
+		String expected = "rblanking1";
+		Employee emp = empd.getByUsername(expected);
+		String actual = emp.getUsername();
+		assertNotEquals(null, actual);
+		
+	}
+	
+	@Test
+	public void getbyUsernameInvalidEmp() {
+		String expected = "ponce";
+		String real = "rblanking1";
+		Employee emp = empd.getByUsername(real);
+		String actual = emp.getUsername();
+		assertNotEquals(expected, actual);
+	}
+	
+	@Test
+	public void getByUsernameValidEmp() {
+		String expected = "vwraggs2";
+		Employee emp = empd.getByUsername(expected);
+		String actual = emp.getUsername();
+		assertEquals(expected, actual);
+	}
+	
+	
+	
+	
 
 }
