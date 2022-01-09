@@ -13,6 +13,10 @@ public class EventType {
 		percentCovered=30.0;
 	}
 
+	public EventType(int eventId, String name, double percentCoverage) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getEventId() {
 		return eventId;
 	}

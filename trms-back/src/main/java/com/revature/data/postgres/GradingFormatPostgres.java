@@ -61,8 +61,8 @@ public class GradingFormatPostgres implements GradingFormatDAO {
 	}
 
 	@Override
-	public Set<GradingFormat> getByName(String name) {
-		Set<GradingFormat> formats = new HashSet<>();
+	public GradingFormat getByName(String name) {
+		GradingFormat formats = new GradingFormat();
 		try (Connection conn = connUtil.getConnection()) {
 			String sql = "select * from grading_format where format_name=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);

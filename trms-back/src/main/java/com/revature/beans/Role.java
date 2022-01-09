@@ -11,6 +11,10 @@ public class Role {
 		name="Employee";
 	}
 
+	public Role(int roleId, String name) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getRoleId() {
 		return roleId;
 	}

@@ -13,6 +13,10 @@ public class Status {
 		approver="Direct Supervisor";
 	}
 
+	public Status(int statusId, String name, String approver) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getStatusId() {
 		return statusId;
 	}

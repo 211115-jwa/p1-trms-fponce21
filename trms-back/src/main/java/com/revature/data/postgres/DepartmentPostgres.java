@@ -63,8 +63,8 @@ public class DepartmentPostgres implements DepartmentDAO {
 	}
 
 	@Override
-	public Set<Department> getByName(String name) {
-		Set<Department> depts = new HashSet<>();
+	public Department getByName(String name) {
+		Department dept = new Department();
 		try (Connection conn = connUtil.getConnection()) {
 			String sql = "select * from department where dept_name=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -73,18 +73,18 @@ public class DepartmentPostgres implements DepartmentDAO {
 			ResultSet resultSet = pStmt.executeQuery();
 			
 			while (resultSet.next()) {
-				Department dept = new Department();
+				
 				dept.setDeptId(resultSet.getInt("dept_id"));
 				dept.setName(resultSet.getString("dept_name"));
 				dept.setDeptHeadId(resultSet.getInt("dept_head_id"));
 				
-				depts.add(dept);
+				
 			}
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return depts;
+		return dept;
 	}
 
 }

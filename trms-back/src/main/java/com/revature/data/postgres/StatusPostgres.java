@@ -62,8 +62,8 @@ public class StatusPostgres implements StatusDAO {
 	}
 
 	@Override
-	public Set<Status> getByName(String name) {
-		Set<Status> statuses = new HashSet<>();
+	public Status getByName(String name) {
+		Status status = new Status();
 		try (Connection conn = connUtil.getConnection()) {
 			String sql = "select * from status where status_name=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -72,17 +72,17 @@ public class StatusPostgres implements StatusDAO {
 			ResultSet resultSet = pStmt.executeQuery();
 			
 			while (resultSet.next()) {
-				Status status = new Status();
+			
 				status.setStatusId(resultSet.getInt("status_id"));
 				status.setName(resultSet.getString("status_name"));
 				status.setApprover(resultSet.getString("approver"));
-				statuses.add(status);
+
 			}
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return statuses;
+		return status;
 	}
 
 }

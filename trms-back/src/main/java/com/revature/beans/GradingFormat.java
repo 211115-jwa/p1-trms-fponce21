@@ -13,6 +13,10 @@ public class GradingFormat {
 		example=null;
 	}
 
+	public GradingFormat(int gfId, String name, String ex) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getFormatId() {
 		return formatId;
 	}

@@ -1,5 +1,6 @@
 package com.revature.data;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDate;
@@ -26,8 +27,8 @@ public class ReimbursementDaoTest {
 		EventType etp = new EventType();
 		Status stat = new Status();
 		Reimbursement create = new Reimbursement();
-		LocalDate day = LocalDate.of(2022, 01, 8);
-		LocalTime time = LocalTime.of(10, 32);
+		LocalDate day = LocalDate.of(2021, 06, 22);
+		LocalTime time = LocalTime.of(22, 25);
 		int id = 52;
 		
 		create.getRequestor().setEmpId(id);
