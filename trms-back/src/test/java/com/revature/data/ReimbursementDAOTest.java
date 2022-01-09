@@ -27,7 +27,7 @@ public class ReimbursementDaoTest {
 		Status stat = new Status();
 		Reimbursement create = new Reimbursement();
 		LocalDate day = LocalDate.of(2022, 01, 8);
-		LocalTime time = LocalTime.of(8, 19);
+		LocalTime time = LocalTime.of(10, 32);
 		int id = 52;
 		
 		create.getRequestor().setEmpId(id);
@@ -52,6 +52,47 @@ public class ReimbursementDaoTest {
 		assertNotEquals(null, actual);
 		
 	}
+	
+	@Test
+	public void getByRequestorNotnull() {
+		Employee emp1 = empd.getById(16);
+		Set<Reimbursement> actual = reimb.getByRequestor(emp1);
+		assertNotEquals(null, actual);
+		
+	}
+	
+	/*@Test
+	public void getByIdValidReimbursement() {
+		String expected = "2021-07-18 03:44:44";
+		Reimbursement r1 = reimb.getById(4);
+		LocalDate d = r1.getEventDate();
+		LocalTime t = r1.getEventTime();
+		d.toString();
+		t.toString();
+		String actual = d + " " + t;
+		assertEquals(expected, actual);
+		
+		}*/
+	
+	@Test
+	public void getReimbursementByValidRequestor() {
+		Employee emp1 = empd.getById(16);
+		Set<Reimbursement> reqs = reimb.getByRequestor(emp1);
+		Employee actual = new Employee();
+		for (Reimbursement req : reqs) {
+			actual = req.getRequestor();
+		}
+		
+	}
+	
+	/*@Test
+	public void getReimbursementByInvalidRequestor() {
+		Employee emp1 = empd.getById(200);
+		Employee r = empd.getById(1);
+		Reimbursement req = reimb.getByRequestor(emp1);
+		Employee actual = req.getRequestor();
+		assertNotEquals(emp1, actual);
+	}*/
 	
 	
 		

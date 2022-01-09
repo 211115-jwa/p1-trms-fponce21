@@ -31,6 +31,12 @@ public class Reimbursement {
 		status = new Status();
 		submittedAt = LocalDateTime.now();
 	}
+	
+	public Reimbursement (int reqid) {
+		super();
+		this.reqId = reqid;
+		
+	}
 
 	public int getReqId() {
 		return reqId;
