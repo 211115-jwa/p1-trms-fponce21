@@ -6,6 +6,7 @@ import java.util.Map;
 import com.revature.beans.Comment;
 import com.revature.beans.Employee;
 import com.revature.beans.Reimbursement;
+import com.revature.exceptions.WrongUsrPsswrdException;
 
 public interface EmployeeService {
 	/**
@@ -67,4 +68,6 @@ public interface EmployeeService {
 	 * @return the specified employee
 	 */
 	public Employee getEmployeeById(int empId);
+
+	public Employee logIn(String username, String password) throws WrongUsrPsswrdException;
 }

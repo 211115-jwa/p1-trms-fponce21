@@ -15,6 +15,7 @@ import com.revature.data.EventTypeDAO;
 import com.revature.data.GradingFormatDAO;
 import com.revature.data.ReimbursementDAO;
 import com.revature.data.StatusDAO;
+import com.revature.exceptions.WrongUsrPsswrdException;
 import com.revature.utils.DAOFactory;
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -69,6 +70,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public Employee getEmployeeById(int empId) {
 		return empDao.getById(empId);
+	}
+
+	@Override
+	public Employee logIn(String username, String password) throws WrongUsrPsswrdException {
+		Employee emp = empDao.getByUsername(username);
+		if (emp != null && emp.getPassword().equals(password)) {
+			return emp;
+		} else {
+			throw new WrongUsrPsswrdException();
+		}
 	}
 
 }

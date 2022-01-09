@@ -8,13 +8,16 @@ public class GradingFormat {
 	private String example;
 	
 	public GradingFormat() {
-		formatId=4;
-		name="Other";
-		example=null;
+		formatId=1;
+		name="Pass/Fail";
+		example="Pass";
 	}
 
 	public GradingFormat(int gfId, String name, String ex) {
-		// TODO Auto-generated constructor stub
+		super();
+		this.formatId = gfId;
+		this.name = name;
+		this.example = ex;
 	}
 
 	public int getFormatId() {
@@ -62,4 +65,8 @@ public class GradingFormat {
 	public String toString() {
 		return "GradingFormat [formatId=" + formatId + ", name=" + name + ", example=" + example + "]";
 	}
+
+
+	
+	
 }
