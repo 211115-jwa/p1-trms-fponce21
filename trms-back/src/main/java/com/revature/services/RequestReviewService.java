@@ -25,18 +25,9 @@ public interface RequestReviewService {
 	 * @param approver the employee who must approve the returned requests
 	 * @return the Set of requests awaiting the specified employee's approval
 	 */
-	public Set<Reimbursement> getPendingReimbursements(Employee approver);
 	
-	/**
-	 * Sets the specified request to the next status. For example, if
-	 * the status was "Pending" with an approver of "Direct Supervisor",
-	 * then the method should set the specified request's status to
-	 * "Pending" with an approver of "Department Head".
-	 * <p>
-	 * The method then proceeds to update this information in the database.
-	 * 
-	 * @param request the request to be approved
-	 */
+	
+	
 	public void approveRequest(Reimbursement request);
 	
 	/**
@@ -57,4 +48,17 @@ public interface RequestReviewService {
 	 * @param request the request to be rejected
 	 */
 	public void rejectRequest(Reimbursement request, Comment comment);
+	
+	/**
+	 * Sets the specified request to the next status. For example, if
+	 * the status was "Pending" with an approver of "Direct Supervisor",
+	 * then the method should set the specified request's status to
+	 * "Pending" with an approver of "Department Head".
+	 * <p>
+	 * The method then proceeds to update this information in the database.
+	 * 
+	 * @param request the request to be approved
+	 */
+
+	public Set<Reimbursement> getPendingReimbursements(Employee approver, int i);
 }

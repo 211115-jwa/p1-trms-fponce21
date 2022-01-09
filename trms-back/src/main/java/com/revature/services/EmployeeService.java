@@ -70,4 +70,6 @@ public interface EmployeeService {
 	public Employee getEmployeeById(int empId);
 
 	public Employee logIn(String username, String password) throws WrongUsrPsswrdException;
+	
+	//public int updateReimbursementRequest(Reimbursement update);
 }

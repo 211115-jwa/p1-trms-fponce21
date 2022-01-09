@@ -1,25 +1,28 @@
 package com.revature.controllers;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.util.Set;
+
 import com.revature.beans.Employee;
 import com.revature.beans.Reimbursement;
+import com.revature.data.ReimbursementDAO;
 import com.revature.services.EmployeeService;
 import com.revature.services.EmployeeServiceImpl;
+import com.revature.services.RequestReviewService;
+import com.revature.services.RequestReviewServiceImpl;
+import com.revature.utils.DAOFactory;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpCode;
 
 public class RequestsController {
 	
-	ObjectMapper objectMapper = new ObjectMapper().registerModule( new JavaTimeModule())
-			.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 	
-	//private static Logger log = LogManager.getLogger(RequestsController.class);
-	//look at logging recording
-	private static EmployeeService empServ = new EmployeeServiceImpl();
+	
+	private static RequestReviewService reqS = new RequestReviewServiceImpl();
+	private static EmployeeService empS = new EmployeeServiceImpl();
+	private static ReimbursementDAO reqD = DAOFactory.getReimbursementDAO();
+	
 	
 	/**
 	 * Retrieves the submitted reimbursement request from the
@@ -42,14 +45,14 @@ public class RequestsController {
 		Reimbursement request = ctx.bodyAsClass(Reimbursement.class);
 		//log.info("request object has been submitted:" + request);
 		//ctx.result("");
-		int reqId = empServ.submitReimbursementRequest(request);
+		int reqId = empS.submitReimbursementRequest(request);
 		if (reqId != 0) {
 			ctx.status(HttpCode.CREATED);
 			request.setReqId(reqId);
 			ctx.json(request);
 		} else {
 			ctx.status(400);
-			ctx.result("Something went wrong with your submission. Please try again.");
+			ctx.result("Something went wrong. Please try again.");
 		}
 	}
 	
@@ -76,10 +79,10 @@ public class RequestsController {
 		
 		try {
 			int requestorId = Integer.valueOf(requestorIdStr);
-			Employee requestor = empServ.getEmployeeById(requestorId);
+			Employee requestor = empS.getEmployeeById(requestorId);
 			
 			if (requestor != null) {
-				ctx.json(empServ.getReimbursementRequests(requestor));
+				ctx.json(empS.getReimbursementRequests(requestor));
 			} else {
 				ctx.status(404);
 				ctx.result("The user you specified does not exist.");
@@ -89,4 +92,56 @@ public class RequestsController {
 			ctx.result("Requestor ID must be an integer. Please try again.");
 		}
 	}
+	public static void getRequestsByApprover(Context ctx) {
+		String appIdStr = ctx.pathParam("id");
+		
+		try {
+			int appId = Integer.valueOf(appIdStr);
+			Employee approver = empS.getEmployeeById(appId);
+			int statId = 1;
+			
+			if (approver != null) {
+				ctx.json(reqS.getPendingReimbursements(approver, statId));
+			} else {
+				ctx.status(404);
+				ctx.result("The user you specified does not exist.");
+			}
+		} catch (NumberFormatException e) {
+			ctx.status(400);
+			ctx.result("Requestor ID must be an integer. Please try again.");
+		}
+	}
+	
+	public static void getAllReqs(Context ctx) {
+		String username = ctx.queryParam("username");
+
+		if (username != null && !"".equals(username)) {
+			Set<Reimbursement> reqs = reqD.getAll();
+			ctx.json(reqs);
+		} else {
+			String error = "Username is empty.";
+			ctx.json(error);
+		}	
+	}
+	
+	/*public static void updateARequest(Context ctx) {
+		Reimbursement updReq = ctx.bodyAsClass(Reimbursement.class);
+		//log.info("request object has been submitted:" + request);
+		//ctx.result("");
+		int reqId = empS.u
+		//if (reqId != 0) {
+			//ctx.status(HttpCode.CREATED);
+			//request.setReqId(reqId);
+			//ctx.json(request);
+	//	} else {
+		//	ctx.status(400);
+		//	ctx.result("Something went wrong. Please try again.");
+	//	}
+	}
+	
+		
+		
+	}*/
+	
+	
 }
