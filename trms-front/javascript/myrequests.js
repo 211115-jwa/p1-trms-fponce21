@@ -1,26 +1,13 @@
-checkLogin().then(() => {
-    console.log(loggedInPerson);
-    if (loggedInPerson.reqs || loggedInPerson.reqs.size > 0)
-        showReqs(loggedInPerson.reqs)
-    else {
-        document.getElementById('submittedReqs').remove();
+getMySubmittedReqs();
 
-        let noReqMsg = document.createElement('p');
-        noPReqMsg.innerText = 'Hmm... you don\'t have any requests yet! Try submitting some on the TRMS Request Form page!';
-        document.getElementsByTagName('main')[0].appendChild(noReqMsg);
-    }
-});
-
-getMySubmittedRequests();
-
-async function getMySubmittedRequests() {
+async function getMySubmittedReqs() {
     let empId = localStorage.getItem('Token');
-    let res1 = await fetch(appUrl + 'reqs/requestor/' + empId); 
-    let res2 = await fetch(appUrl + 'employees/' );       
-    if (res1.status === 200 && res2.status === 200) {
+    let response = await fetch(appUrl + 'reqs/requestor/' + empId); 
+    let response1 = await fetch(appUrl + 'employees/' );       
+    if (response.status === 200 && response2.status === 200) {
         let reqs = await response.json();
-        let emps = await response2.json();
-        showReqs(reqs, emps);  
+        let emps = await response1.json();
+        showReqs(reqs, emps);
     }
 }
 

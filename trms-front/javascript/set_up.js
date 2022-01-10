@@ -31,6 +31,7 @@ function setupNav() {
 
     if (!loggedInPerson) {
         nav.innerHTML = `<span id="navLeft">
+        <a hidden>My Submitted Requests</a>
         <a href="index.html">TRMS</a>
         <a hidden>My Submitted Requests</a>
         </span>
@@ -41,8 +42,9 @@ function setupNav() {
         document.getElementById('login').addEventListener('click',openLogin);
     } else if (loggedInPerson.role.name !== 'Supervisor') {
         nav.innerHTML = `<span id="navLeft">
+        <a href="addreq.html">Add Request</a>
         <a href="index.html">TRMS</a>
-        <a href="myrequests.html">My Submitted Requests</a>
+        <a href="myreqs.html">My Submitted Requests</a>
         </span>
         <span id="navRight">
         <a id="manageEmployee" href="manage.html">${loggedInPerson.username}</a>
@@ -52,12 +54,13 @@ function setupNav() {
         document.getElementById('logout').addEventListener('click',logOut);
     } else {
         nav.innerHTML = `<span id="navLeft">
+        <a href="addreq.html">Add Request</a>
         <a href="index.html">TRMS</a>
-        <a href="myrequests.html">My Submitted Requests</a>
-        <a href="approverrequest.html">Requests to Approve</a>
+        <a href="myreqs.html">My Submitted Requests</a>
+        <a href="approvreqs.html">Requests to Approve</a>
         </span>
         <span id="navRight">
-        <a id="manageEmployee" href="administer.html">${loggedInPerson.username}</a>
+        <a id="manageEmployee" href="manage.html">${loggedInPerson.username}</a>
         <button id="logout">Log Out</button>
         </span>`;
 
@@ -102,12 +105,12 @@ async function submitLogin() {
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    let credentials = {
+    let creds = {
         'username':username,
         'password':password
     };
 
-    let response = await fetch(appUrl + 'employees/auth',{method:'POST',body:JSON.stringify(credentials)});
+    let response = await fetch(appUrl + 'employees/auth',{method:'POST',body:JSON.stringify(creds)});
     if (response.status===200) {
         let token = await response.text();
         localStorage.setItem('Token', token);

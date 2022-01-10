@@ -27,7 +27,7 @@ public class RequestsController {
 	private static RequestReviewService reqS = new RequestReviewServiceImpl();
 	private static EmployeeService empS = new EmployeeServiceImpl();
 	private static ReimbursementDAO reqD = DAOFactory.getReimbursementDAO();
-	private static Logger log = LogManager.getLogger(RequestsController.class);
+	
 	
 	/**
 	 * Retrieves the submitted reimbursement request from the

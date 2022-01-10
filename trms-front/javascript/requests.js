@@ -1,9 +1,11 @@
+getReqsAndEmps();
+
 async function getReqsAndEmps() {
-    let res1 = await fetch(appUrl + 'reqs/');
-    let res2 = await fetch(appUrl + 'employees/' );
-    if (res1.status === 200 && res2.status === 200) {
-        let reqs = await res1.json();
-        let emps = await res2.json();
+    let response = await fetch(appUrl + 'reqs/');
+    let response1 = await fetch(appUrl + 'employees/' );
+    if (response.status === 200 && response1.status === 200) {
+        let reqs = await response.json();
+        let emps = await response1.json();
         showReqs(reqs, emps);
     }
 }
@@ -93,7 +95,3 @@ function showReqs(reqs, emps) {
          
     }
 }
-
-
-
-
