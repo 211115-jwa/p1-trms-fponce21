@@ -2,9 +2,9 @@ getMySubmittedReqs();
 
 async function getMySubmittedReqs() {
     let empId = localStorage.getItem('Token');
-    let response = await fetch(appUrl + 'reqs/requestor/' + empId); 
+    let response = await fetch(appUrl + 'requests/requestor/' + empId); 
     let response1 = await fetch(appUrl + 'employees/' );       
-    if (response.status === 200 && response2.status === 200) {
+    if (response.status === 200 && response1.status === 200) {
         let reqs = await response.json();
         let emps = await response1.json();
         showReqs(reqs, emps);

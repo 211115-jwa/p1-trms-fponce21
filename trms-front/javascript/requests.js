@@ -1,7 +1,7 @@
-getReqsAndEmps();
+//getReqsAndEmps();
 
 async function getReqsAndEmps() {
-    let response = await fetch(appUrl + 'reqs/');
+    let response = await fetch(appUrl + 'requests/requestor/{id}');
     let response1 = await fetch(appUrl + 'employees/' );
     if (response.status === 200 && response1.status === 200) {
         let reqs = await response.json();

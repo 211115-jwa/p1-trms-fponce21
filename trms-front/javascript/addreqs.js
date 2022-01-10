@@ -43,7 +43,7 @@ async function submitRequest() {
     else{
         
       console.log(request);
-        let response = await fetch(appUrl + 'reqs', {
+        let response = await fetch(appUrl + 'requests', {
         method: 'POST',
         body: JSON.stringify(request),
         });

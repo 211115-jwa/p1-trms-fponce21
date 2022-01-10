@@ -18,7 +18,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class GetRequestStepImpl {
-public static WebDriver driver;
+	public static WebDriver driver;
 	
 	@BeforeAll
 	public static void setupDriver() {

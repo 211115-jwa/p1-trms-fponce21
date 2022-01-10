@@ -36,21 +36,21 @@ public class LogInStepImpl {
 	@Given("the employee is on the TRMS home page")
 	public void the_employee_is_on_the_trms_home_page() {
 		 driver.get("C:\\Users\\user\\Documents\\Project_1\\p1-trms-fponce21\\trms-front\\HTML\\index.html");
-		 WebElement loginLink = driver.findElement(By.id("login"));
-			loginLink.click();	
+		 WebElement login = driver.findElement(By.id("login"));
+			login.click();	
 	}
 	
 	@Given("the user is on the TRMS home page")
 	public void the_user_is_on_the_trms_home_page() {
 		driver.get("C:\\Users\\user\\Documents\\Project_1\\p1-trms-fponce21\\trms-front\\HTML\\index.html");
-		 WebElement loginLink = driver.findElement(By.id("login"));
-			loginLink.click();	
+		 WebElement login = driver.findElement(By.id("login"));
+			login.click();	
 	}
 
 	@Given("the user clicks the Log In link")
 	public void the_user_clicks_the_log_in_link() {
-		WebElement loginBtn = driver.findElement(By.id("login"));
-		loginBtn.click();
+		WebElement login = driver.findElement(By.id("login"));
+		login.click();
 	}
 
 	@When("the user enters {string} and {string} to log in")
@@ -63,20 +63,20 @@ public class LogInStepImpl {
 
 	@When("the user clicks the login button")
 	public void the_user_clicks_the_login_button() {
-		WebElement loginBtn = driver.findElement(By.id("login"));
-		loginBtn.click();
+		WebElement login = driver.findElement(By.id("login"));
+		login.click();
 	}
 
-	@Then("the page says {username}")
-	public void the_page_says(String username) {
+	@Then("the page says {string}")
+	public void the_page_says(String string) {
 		Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
 				.withTimeout(Duration.ofSeconds(5))
 				.pollingEvery(Duration.ofMillis(50));
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.id("loginForm"), 1));
 		
-		WebElement navLink = driver.findElement(By.className(username));
+		WebElement navLink = driver.findElement(By.className(string));
 		
-		assertEquals(username, navLink.getText());
+		assertEquals(string, navLink.getText());
 		
 		driver.findElement(By.id("logout")).click();
 	}

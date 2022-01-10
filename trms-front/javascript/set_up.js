@@ -42,22 +42,22 @@ function setupNav() {
         document.getElementById('login').addEventListener('click',openLogin);
     } else if (loggedInPerson.role.name !== 'Supervisor') {
         nav.innerHTML = `<span id="navLeft">
-        <a href="addreq.html">Add Request</a>
+        <a href="addreqs.html">Add Request</a>
         <a href="index.html">TRMS</a>
-        <a href="myreqs.html">My Submitted Requests</a>
+        <a href="myrequests.html">My Submitted Requests</a>
         </span>
         <span id="navRight">
         <a id="manageEmployee" href="manage.html">${loggedInPerson.username}</a>
         <button id="logout">Log Out</button>
         </span>`;
 
-        document.getElementById('logout').addEventListener('click',logOut);
+        document.getElementById('logout').addEventListener('click', logOut);
     } else {
         nav.innerHTML = `<span id="navLeft">
-        <a href="addreq.html">Add Request</a>
+        <a href="addreqs.html">Add Request</a>
         <a href="index.html">TRMS</a>
-        <a href="myreqs.html">My Submitted Requests</a>
-        <a href="approvreqs.html">Requests to Approve</a>
+        <a href="myrequests.html">My Submitted Requests</a>
+        <a href="approvereqs.html">Requests to Approve</a>
         </span>
         <span id="navRight">
         <a id="manageEmployee" href="manage.html">${loggedInPerson.username}</a>
@@ -120,10 +120,12 @@ async function submitLogin() {
         let msg = await response.text();
         alert(msg);
     }
-}
+
 
 function logOut() {
     localStorage.removeItem('Token');
     loggedInPerson=null;
     checkLogin().then(setupNav);
+}
+
 }

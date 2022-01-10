@@ -1,21 +1,10 @@
 package com.revature.controllers;
 
 
-import java.util.Set;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.eclipse.jetty.client.api.Request;
-
 import com.revature.beans.Employee;
-
 import com.revature.beans.Reimbursement;
-import com.revature.data.ReimbursementDAO;
 import com.revature.services.EmployeeService;
 import com.revature.services.EmployeeServiceImpl;
-import com.revature.services.RequestReviewService;
-import com.revature.services.RequestReviewServiceImpl;
-import com.revature.utils.DAOFactory;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpCode;
@@ -24,9 +13,9 @@ public class RequestsController {
 	
 	
 	
-	private static RequestReviewService reqS = new RequestReviewServiceImpl();
+	
 	private static EmployeeService empS = new EmployeeServiceImpl();
-	private static ReimbursementDAO reqD = DAOFactory.getReimbursementDAO();
+
 	
 	
 	/**
@@ -97,36 +86,12 @@ public class RequestsController {
 			ctx.result("Requestor ID must be an integer. Please try again.");
 		}
 	}
-	public static void getRequestsByApprover(Context ctx) {
-		String appIdStr = ctx.pathParam("id");
 		
-		try {
-			int appId = Integer.valueOf(appIdStr);
-			Employee approver = empS.getEmployeeById(appId);
-			int statId = 1;
-			
-			if (approver != null) {
-				ctx.json(reqS.getPendingReimbursements(approver, statId));
-			} else {
-				ctx.status(404);
-				ctx.result("The user you specified does not exist.");
-			}
-		} catch (NumberFormatException e) {
-			ctx.status(400);
-			ctx.result("Requestor ID must be an integer. Please try again.");
-		}
-	}
 	
-	public static void getAllReqs(Context ctx) {
-		String username = ctx.queryParam("username");
-
-		if (username != null && !"".equals(username)) {
-			Set<Reimbursement> reqs = reqD.getAll();
-			ctx.json(reqs);
-		} else {
-			String error = "Username is empty.";
-			ctx.json(error);
-		}	
+	
+	/*public static void getReqs(Context ctx) {
+		Reimbursement employee = ctx.bodyAsClass(Reimbursement.class);
+		int reqId = empS.getReimbursementRequests(employee);
 	}
 	
 	/*public static void updateARequest(Context ctx) {

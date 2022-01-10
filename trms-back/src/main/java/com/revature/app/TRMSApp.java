@@ -46,19 +46,13 @@ public class TRMSApp {
 				});
 			});
 		
-			path("/reqs", () -> {
+			path("/requests", () -> {
 				
-				get(RequestsController::getAllReqs);
 				post(RequestsController::submitReimbursementRequest);
-				
 				path("/requestor/{id}", () -> {
 					get(RequestsController::getRequestsByRequestor);
 				});	
-				path("/approver/{id}", () -> {
-					get(RequestsController::getRequestsByApprover);
-					//put(RequestsController::updateARequest);
-					
-				});
+				
 			});
 		});
 	}
