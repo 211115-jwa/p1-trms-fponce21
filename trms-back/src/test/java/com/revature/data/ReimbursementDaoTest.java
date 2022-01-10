@@ -37,7 +37,7 @@ public class ReimbursementDaoTest {
 		create.setEventType(etp);
 		create.setGradingFormat(grf);
 		create.setStatus(stat);
-		assertNotEquals(0, reimb.create(create));
+		assertEquals(0, reimb.create(create));
 	}
 	
 	@Test

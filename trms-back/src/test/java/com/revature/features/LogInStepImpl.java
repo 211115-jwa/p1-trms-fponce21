@@ -23,7 +23,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class LogInStepImpl {
-	public static WebDriver driver;
+public static WebDriver driver;
 	
 	@BeforeAll
 	public static void setupDriver() {
@@ -104,3 +104,5 @@ public class LogInStepImpl {
 	}
 
 }
+
+

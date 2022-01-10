@@ -23,7 +23,7 @@ public class GradingFormatDaoTest {
 	
 	@Test
 	public void getByValidNameGradingFormat() {
-		String exp ="Other";
+		String exp ="Pass/Fail";
 		GradingFormat gf = gradform.getByName(exp);
 		String act = gf.getName();
 		assertEquals(exp, act);

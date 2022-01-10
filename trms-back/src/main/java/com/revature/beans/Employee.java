@@ -17,10 +17,10 @@ public class Employee {
 		empId=0;
 		firstName="First";
 		lastName="Last";
-		username="";
-		password="";
+		username="user";
+		password="passwd";
 		role = new Role();
-		funds = 1000.00;
+		funds = 2000.00;
 		supervisor = new Employee(empId);
 		department = new Department();
 	}

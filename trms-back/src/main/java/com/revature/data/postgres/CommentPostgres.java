@@ -6,10 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.revature.beans.Comment;
+import com.revature.beans.Employee;
+import com.revature.beans.Reimbursement;
 import com.revature.data.CommentDAO;
 import com.revature.utils.ConnectionUtil;
 
@@ -18,7 +21,7 @@ public class CommentPostgres implements CommentDAO {
 
 	@Override
 	public int create(Comment dataToAdd) {
-		int generatedId=0;
+		int generatedId=1;
 		try (Connection conn = connUtil.getConnection()) {
 			conn.setAutoCommit(false);
 			String[] keys = {"comment_id"};
@@ -51,7 +54,7 @@ public class CommentPostgres implements CommentDAO {
 	
 	@Override
 	public Comment getById(int id) {
-		Comment comment = null;
+		Comment comm = new Comment();
 		try (Connection conn = connUtil.getConnection()) {
 			String sql = "select * from comment where comment_id=?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -59,20 +62,26 @@ public class CommentPostgres implements CommentDAO {
 			
 			ResultSet resultSet = pStmt.executeQuery();
 			
-			if (resultSet.next()) {
-				comment = new Comment();
-				comment.setCommentId(id);
-				comment.setCommentText(resultSet.getString("comment_text"));
-				comment.getApprover().setEmpId(resultSet.getInt("approver_id"));
-				comment.getRequest().setReqId(resultSet.getInt("req_id"));
-				comment.setSentAt(resultSet.getTimestamp("sent_at").toLocalDateTime());
-			}
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
+			int commId = resultSet.getInt("comment_id");
+			String text = resultSet.getString("comment_text");
+			int appId = resultSet.getInt("approver_id");
+			int reqId = resultSet.getInt("req_id");
+			LocalDateTime ts = resultSet.getTimestamp("sent_at").toLocalDateTime();
+			
+			comm.setCommentId(commId);
+			comm.setCommentText(text);
+			Employee emp = new Employee(appId);
+			comm.setApprover(emp);
+			Reimbursement req = new Reimbursement(reqId);
+			comm.setRequest(req);
+			comm.setSentAt(ts);
 		}
-		return comment;
+	
+	 catch (SQLException e) {
+		e.printStackTrace();
 	}
+	return comm;
+}
 
 	@Override
 	public Set<Comment> getAll() {
@@ -83,15 +92,23 @@ public class CommentPostgres implements CommentDAO {
 			
 			ResultSet resultSet = stmt.executeQuery(sql);
 			
-			if (resultSet.next()) {
-				Comment comment = new Comment();
-				comment.setCommentId(resultSet.getInt("comment_id"));
-				comment.setCommentText(resultSet.getString("comment_text"));
-				comment.getApprover().setEmpId(resultSet.getInt("approver_id"));
-				comment.getRequest().setReqId(resultSet.getInt("req_id"));
-				comment.setSentAt(resultSet.getTimestamp("sent_at").toLocalDateTime());
+			while (resultSet.next()) {
+				int commId = resultSet.getInt("comment_id");
+				String text = resultSet.getString("comment_text");
+				int appId = resultSet.getInt("approver_id");
+				int reqId = resultSet.getInt("req_id");
+				LocalDateTime ts = resultSet.getTimestamp("sent_at").toLocalDateTime();
 				
-				comments.add(comment);
+				Comment comm = new Comment();
+				comm.setCommentId(commId);
+				comm.setCommentText(text);
+				Employee emp = new Employee(appId);
+				comm.setApprover(emp);
+				Reimbursement req = new Reimbursement(reqId);
+				comm.setRequest(req);
+				comm.setSentAt(ts);
+				
+				comments.add(comm);
 			}
 		
 		} catch (SQLException e) {
@@ -110,15 +127,24 @@ public class CommentPostgres implements CommentDAO {
 			
 			ResultSet resultSet = pStmt.executeQuery();
 			
+
 			while (resultSet.next()) {
-				Comment comment = new Comment();
-				comment.setCommentId(resultSet.getInt("comment_id"));
-				comment.setCommentText(resultSet.getString("comment_text"));
-				comment.getApprover().setEmpId(resultSet.getInt("approver_id"));
-				comment.getRequest().setReqId(resultSet.getInt("req_id"));
-				comment.setSentAt(resultSet.getTimestamp("sent_at").toLocalDateTime());
+				int commId = resultSet.getInt("comment_id");
+				String text = resultSet.getString("comment_text");
+				int appId = resultSet.getInt("approver_id");
+				int reqid = resultSet.getInt("req_id");
+				LocalDateTime ts = resultSet.getTimestamp("sent_at").toLocalDateTime();
 				
-				comments.add(comment);
+				Comment comm = new Comment();
+				comm.setCommentId(commId);
+				comm.setCommentText(text);
+				Employee emp = new Employee(appId);
+				comm.setApprover(emp);
+				Reimbursement req = new Reimbursement(reqid);
+				comm.setRequest(req);
+				comm.setSentAt(ts);
+				
+				comments.add(comm);
 			}
 		
 		} catch (SQLException e) {

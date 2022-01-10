@@ -35,8 +35,8 @@ public class CommentDaoTest {
 	
 	@Test
 	public void getAllNotNull() {
-		Set<Comment> actual = comm.getAll();
-		assertNotEquals(null, actual);
+		Set<Comment> act = comm.getAll();
+		assertNotEquals(null, act);
 		
 	}
 	
@@ -56,9 +56,9 @@ public class CommentDaoTest {
 	@Test
 	public void getByValidComment() {
 		String expected = "Pending Approval";
-		Comment c1 = comm.getById(1);
-		String actual = c1.getCommentText();
-		assertEquals(expected, actual);
+		Comment c1 = comm.getById(2);
+		String act = c1.getCommentText();
+		assertEquals(expected, act);
 	}
 	
 
