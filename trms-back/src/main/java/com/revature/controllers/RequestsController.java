@@ -3,7 +3,12 @@ package com.revature.controllers;
 
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.eclipse.jetty.client.api.Request;
+
 import com.revature.beans.Employee;
+
 import com.revature.beans.Reimbursement;
 import com.revature.data.ReimbursementDAO;
 import com.revature.services.EmployeeService;
@@ -22,7 +27,7 @@ public class RequestsController {
 	private static RequestReviewService reqS = new RequestReviewServiceImpl();
 	private static EmployeeService empS = new EmployeeServiceImpl();
 	private static ReimbursementDAO reqD = DAOFactory.getReimbursementDAO();
-	
+	private static Logger log = LogManager.getLogger(RequestsController.class);
 	
 	/**
 	 * Retrieves the submitted reimbursement request from the
@@ -122,6 +127,33 @@ public class RequestsController {
 			String error = "Username is empty.";
 			ctx.json(error);
 		}	
+	}
+	
+	/*public static void updateARequest(Context ctx) {
+		log.info("user is updating a pet");
+		
+		try {
+			int empId = Integer.parseInt(ctx.pathParam("id")); // num format exception
+			log.debug("pet id to update: " + empId);
+			
+			Request reqToEdit = ctx.bodyAsClass(Request.class);
+			log.debug("pet to update from request body: " + reqToEdit);
+			
+			if (reqToEdit != null && reqToEdit.get == empId) {
+				reqToEdit = empS.editEmp(reqToEdit);
+				if (reqToEdit != null)
+					ctx.json(petToEdit);
+				else
+					ctx.status(404);
+			} else {
+				// conflict: the id doesn't match the id of the pet sent
+				ctx.status(HttpCode.CONFLICT);
+			}
+		} catch (NumberFormatException e) {
+			log.error("NumberFormatException for pet id");
+			ctx.status(400);
+			ctx.result("Pet ID must be a numeric value");
+		}
 	}
 	
 	/*public static void updateARequest(Context ctx) {
