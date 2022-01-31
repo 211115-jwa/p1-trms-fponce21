@@ -30,61 +30,54 @@ List of features ready and TODOs for future development
 1. Go to your Documents folder
 2. Make a new folder
 3. Rename your new folder "TRMS"
-
-If You Have a Windows Computer
-
-  4. Open a new Command Prompt in your TRMS folder like this.
- 
-If You Have a Mac
-  4. Open a new terminal in your TRMS folder like this.
-
-Joint Instructions
-  5. Go to this project's GitHub page and clicking on the green code button.
-  6. Most of you want HTTPS
-  7. Click the double boxes to copy this command.
-  
-If You Have a Windows Computer
-  8. Go back to your command prompt that you opened in step 4.
-  
-If You Have a Mac
-  8. Go back to your terminal that you opened in step 4.
-Joint Instructions
-  9. Type
-    git clone [paste url here]
-    
-Now we check if you have Java and if you do, which version.
-  10. In your command prompt/terminal type:
-    javac -version
-  11. It should look something like this.
-    javaVersion
-  12. If there is no return value or the version number is below 8 go here. Follow the instructions for your operating system.
-  13. Next you will install PostgreSQL from here. Follow the instructions for your operating system.
-  14. Install Eclipse from here
-  15. Install DBeaver from here
-    - In step 9. you cloned the repository into your new folder TRMS. Now that you have Java, Postgres, Eclipse, and VS Code            installed on your system, you are going to populate your new SQL database and run the program.
-  16. Open Eclipse IDE for Enterprise Developers
-  17. Go to File -> Import -> Maven -> Existing Maven Projects
-  18. Browse for trms-back
-  19. Finish
-    - The SQL scripts are in src/main/resources
-  20. Open DBeaver
-  21. Go to File -> New
-  22. Select DBeaver -> Database Connection
-  23. Select the PostgreSQL Blue Elephant
-  24. Leave everything as it is
-  25. Check the connection, if not connecting, troubleshoot.
-  26. Finish
-  27. Make a database.properties in src/main/resources that looks similar to this:
-  28. Make a Schema called trms
-  29. Right click on trms, go to SQL Editor -> Open SQL Console
-  30. Copy the Script in DDL.sql into the SQL Console and run it.
-  31. Repeat step 29. then Copy the DML.sql into the new console and run it.
-  32. Expand src/main/java -> com.revature.app -> TRMSApp.java
-  33. Right click on TRMSApp.java
-  34. Select Run as -> Java Application
-  35. Start the App by going to the directory that you placed the TRMS App into, navigating to trms-front -> html
-  36. Open index.html in a web browser of your choice
-  37. You are ready to run the TRMS.
+- If You Have a Windows Computer
+4. Open a new Command Prompt in your TRMS folder like this.
+- If You Have a Mac
+4. Open a new terminal in your TRMS folder like this.
+- Joint Instructions
+5. Go to this project's GitHub page and clicking on the green code button.
+6. Most of you want HTTPS
+7. Click the double boxes to copy this command.
+- If You Have a Windows Computer
+8. Go back to your command prompt that you opened in step 4.
+- If You Have a Mac
+8. Go back to your terminal that you opened in step 4.
+- Joint Instructions
+9. Type
+    - git clone [paste url here]
+- Now we check if you have Java and if you do, which version.
+10. In your command prompt/terminal type:
+    - javac -version
+11. It should look something like this.
+- javaVersion
+12. If there is no return value or the version number is below 8 go here. Follow the instructions for your operating system.
+13. Next you will install PostgreSQL from here. Follow the instructions for your operating system.
+14. Install Eclipse from here
+15. Install DBeaver from here
+ - In step 9. you cloned the repository into your new folder TRMS. Now that you have Java, Postgres, Eclipse, and VS Code            installed on your system, you are going to populate your new SQL database and run the program.
+16. Open Eclipse IDE for Enterprise Developers
+17. Go to File -> Import -> Maven -> Existing Maven Projects
+18. Browse for trms-back
+19. Finish
+- The SQL scripts are in src/main/resources
+20. Open DBeaver
+21. Go to File -> New
+22. Select DBeaver -> Database Connection
+23. Select the PostgreSQL Blue Elephant
+24. Leave everything as it is
+25. Check the connection, if not connecting, troubleshoot.
+26. Finish
+27. Make a database.properties in src/main/resources that looks similar to this:
+28. Make a Schema called trms
+29. Right click on trms, go to SQL Editor -> Open SQL Console
+30. Copy the Script in DDL.sql into the SQL Console and run it.
+31. Repeat step 29. then Copy the DML.sql into the new console and run it.
+32. Expand src/main/java -> com.revature.app -> TRMSApp.java
+33. Right click on TRMSApp.java
+34. Select Run as -> Java Application
+35. Start the App by going to the directory that you placed the TRMS App into, navigating to trms-front -> html
+36. Open index.html in a web browser of your choice
+37. You are ready to run the TRMS.
 
 ## License
 
