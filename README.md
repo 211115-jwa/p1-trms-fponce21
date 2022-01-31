@@ -18,7 +18,7 @@ List of features ready and TODOs for future development
 4. DAO JUnit tests are successful
 5. Service JUnit/Mockito tests are successful
 6. As an Employee I can submit a TRMS Reimbursement Request
-  To-Do List:
+  - To-Do List:
 1. All TRMS Reimbursement Requests can be viewed
 2. Supervisors can view Their Own submitted TRMS Reimbursement Requests
 3. Front end must be built using HTML/CSS and JavaScript. Styling libraries like Bootstrap are allowed.
