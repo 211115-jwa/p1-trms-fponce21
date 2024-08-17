@@ -13,7 +13,7 @@ import com.revature.beans.Employee;
 import com.revature.data.postgres.EmployeePostgres;
 import com.revature.utils.DAOFactory;
 
-public class EmployeeDaoTest {
+public class EmployeeDAOTest {
 	
 	private EmployeeDAO empd = DAOFactory.getEmployeeDAO();
 	
